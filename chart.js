@@ -6,25 +6,34 @@ var force, node, data, maxVal;
 var brake = 0.2;
 var radius = d3.scale.sqrt().range([10, 20]);
 
-var partyCentres = { 
-    con: { x: w / 3, y: h / 3.3}, 
-    lab: {x: w / 3, y: h / 2.3}, 
+var partyCentres = {
+    con: { x: w / 3, y: h / 3.3},
+    lab: {x: w / 3, y: h / 2.3},
     lib: {x: w / 3	, y: h / 1.8}
-  };
+};
 
-var entityCentres = { 
+var entityCentres = {
     company: {x: w / 3.65, y: h / 2.3},
-		union: {x: w / 3.65, y: h / 1.8},
-		other: {x: w / 1.15, y: h / 1.9},
-		society: {x: w / 1.12, y: h  / 3.2 },
-		pub: {x: w / 1.8, y: h / 2.8},
-		individual: {x: w / 3.65, y: h / 3.3},
-	};
+	union: {x: w / 3.65, y: h / 1.8},
+	other: {x: w / 1.15, y: h / 1.9},
+	society: {x: w / 1.12, y: h  / 3.2 },
+	pub: {x: w / 1.8, y: h / 2.8},
+	individual: {x: w / 3.65, y: h / 3.3},
+};
 
-var fill = d3.scale.ordinal().range(["#F02233", "#087FBD", "#FDBB30"]);
+var amountCenters = {
+        tier1: {x: 250, y: h / 3 - 20},
+    	tier2: {x: 380, y: h / 3 + 200},
+    	tier3: {x: 480, y: h / 3 - 20},
+    	tier4: {x: 630, y: h / 3 + 200},
+    	tier5: {x: 750, y: h / 3 - 30}
+};
 
-var svgCentre = { 
-    x: w / 3.6, y: h / 2
+var fill = d3.scale.ordinal().range(["#00FF00", "#0000FF", "#FF0000"]);
+
+var svgCentre = {
+    x: w / 3.6,
+    y: h / 2
   };
 
 var svg = d3.select("#chart").append("svg")
@@ -48,6 +57,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
+		$("#view-by-amount").fadeOut(250);
 		return total();
 		//location.reload();
 	}
@@ -57,6 +67,7 @@ function transition(name) {
 		$("#view-donor-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-party-type").fadeIn(1000);
+		$("#view-by-amount").fadeOut(250);
 		return partyGroup();
 	}
 	if (name === "group-by-donor-type") {
@@ -65,16 +76,28 @@ function transition(name) {
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeOut(250);
 		$("#view-donor-type").fadeIn(1000);
+		$("#view-by-amount").fadeOut(250);
 		return donorType();
 	}
-	if (name === "group-by-money-source")
+	if (name === "group-by-money-source"){
 		$("#initial-content").fadeOut(250);
 		$("#value-scale").fadeOut(250);
 		$("#view-donor-type").fadeOut(250);
 		$("#view-party-type").fadeOut(250);
 		$("#view-source-type").fadeIn(1000);
+		$("#view-by-amount").fadeOut(250);
 		return fundsType();
+    }
+    if (name === "group-by-amount") {
+		$("#initial-content").fadeOut(250);
+		$("#value-scale").fadeOut(250);
+		$("#view-party-type").fadeOut(250);
+		$("#view-source-type").fadeOut(250);
+		$("#view-donor-type").fadeOut(250);
+		$("#view-by-amount").fadeIn(1000);
+		return amountTier();
 	}
+}
 
 function start() {
 
@@ -92,7 +115,10 @@ function start() {
 		.attr("r", 0)
 		.style("fill", function(d) { return fill(d.party); })
 		.on("mouseover", mouseover)
-		.on("mouseout", mouseout);
+		.on("mouseout", mouseout)
+        .on("click", function(d) {
+            console.log("geia");
+            window.open('http://google.com/search?q='+d.donor); });
 		// Alternative title based 'tooltips'
 		// node.append("title")
 		//	.text(function(d) { return d.donor; });
@@ -122,8 +148,8 @@ function partyGroup() {
 		.friction(0.8)
 		.charge(function(d) { return -Math.pow(d.radius, 2.0) / 3; })
 		.on("tick", parties)
-		.start()
-		.colourByParty();
+		.start();
+		//.colourByParty();
 }
 
 function donorType() {
@@ -142,55 +168,64 @@ function fundsType() {
 		.start();
 }
 
+function amountTier() {
+	force.gravity(0)
+		.friction(0.8)
+		.charge(function(d) { return -Math.pow(d.radius, 2.0) / 3; })
+		.on("tick", tiers)
+		.start();
+}
+
+function tiers(t) {
+	node.each(moveToTiers(t.alpha));
+	node.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; });
+}
+
 function parties(e) {
 	node.each(moveToParties(e.alpha));
-
-		node.attr("cx", function(d) { return d.x; })
-			.attr("cy", function(d) {return d.y; });
+    node.attr("cx", function(d) { return d.x; })
+		.attr("cy", function(d) {return d.y; });
 }
 
 function entities(e) {
 	node.each(moveToEnts(e.alpha));
-
-		node.attr("cx", function(d) { return d.x; })
-			.attr("cy", function(d) {return d.y; });
+	node.attr("cx", function(d) {return d.x; })
+		.attr("cy", function(d) {return d.y; });
 }
 
 function types(e) {
 	node.each(moveToFunds(e.alpha));
-
-
-		node.attr("cx", function(d) { return d.x; })
-			.attr("cy", function(d) {return d.y; });
+	node.attr("cx", function(d) { return d.x; })
+		.attr("cy", function(d) {return d.y; });
 }
 
 function all(e) {
 	node.each(moveToCentre(e.alpha))
 		.each(collide(0.001));
-
-		node.attr("cx", function(d) { return d.x; })
-			.attr("cy", function(d) {return d.y; });
+	node.attr("cx", function(d) { return d.x; })
+		.attr("cy", function(d) {return d.y; });
 }
 
 
 function moveToCentre(alpha) {
 	return function(d) {
 		var centreX = svgCentre.x + 75;
-			if (d.value <= 25001) {
-				centreY = svgCentre.y + 75;
-			} else if (d.value <= 50001) {
-				centreY = svgCentre.y + 55;
-			} else if (d.value <= 100001) {
-				centreY = svgCentre.y + 35;
-			} else  if (d.value <= 500001) {
-				centreY = svgCentre.y + 15;
-			} else  if (d.value <= 1000001) {
-				centreY = svgCentre.y - 5;
-			} else  if (d.value <= maxVal) {
-				centreY = svgCentre.y - 25;
-			} else {
-				centreY = svgCentre.y;
-			}
+		if (d.value <= 25001) {
+			centreY = svgCentre.y + 75;
+		} else if (d.value <= 50001) {
+			centreY = svgCentre.y + 55;
+		} else if (d.value <= 100001) {
+			centreY = svgCentre.y + 35;
+		} else  if (d.value <= 500001) {
+			centreY = svgCentre.y + 15;
+		} else  if (d.value <= 1000001) {
+			centreY = svgCentre.y - 5;
+		} else  if (d.value <= maxVal) {
+			centreY = svgCentre.y - 25;
+		} else {
+			centreY = svgCentre.y;
+		}
 
 		d.x += (centreX - d.x) * (brake + 0.06) * alpha * 1.2;
 		d.y += (centreY - 100 - d.y) * (brake + 0.06) * alpha * 1.2;
@@ -211,14 +246,34 @@ function moveToParties(alpha) {
 	};
 }
 
-function moveToEnts(alpha) {
+function moveToTiers(alpha) {
 	return function(d) {
-		var centreY = entityCentres[d.entity].y;
-		if (d.entity === 'pub') {
-			centreX = 1200;
-		} else {
-			centreX = entityCentres[d.entity].x;
-		}
+		// var centreY = entityCentres[d.entity].y;
+        t1 = 5000000;
+        t2 =  750000;
+        t3 =  150000;
+        t4 =   50000;
+
+        if (d.value > t1){
+            centreX = amountCenters.tier1.x;
+            centreY = amountCenters.tier1.y;
+        }
+        if (d.value <= t1  && d.value > t2) {
+            centreX = amountCenters.tier2.x;
+            centreY = amountCenters.tier2.y;
+        }
+        if (d.value <= t2 && d.value > t3) {
+            centreX = amountCenters.tier3.x;
+            centreY = amountCenters.tier3.y;
+        }
+        if (d.value <= t3 && d.value > t4) {
+            centreX = amountCenters.tier4.x;
+            centreY = amountCenters.tier4.y;
+        }
+        if (d.value <= t4) {
+            centreX = amountCenters.tier5.x;
+            centreY = amountCenters.tier5.y;
+        }
 
 		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
@@ -236,6 +291,20 @@ function moveToFunds(alpha) {
 			centreX = entityCentres[d.entity].x + 60;
 			centreY = 380;
 		}
+		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
+		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
+	};
+}
+
+function moveToEnts(alpha) {
+	return function(d) {
+		var centreY = entityCentres[d.entity].y;
+		if (d.entity === 'pub') {
+			centreX = 1200;
+		} else {
+			centreX = entityCentres[d.entity].x;
+		}
+
 		d.x += (centreX - d.x) * (brake + 0.02) * alpha * 1.1;
 		d.y += (centreY - d.y) * (brake + 0.02) * alpha * 1.1;
 	};
@@ -294,11 +363,11 @@ function display(data) {
 				x: Math.random() * w,
 				y: -y
       };
-			
+
       nodes.push(node)
 	});
 
-	console.log(nodes);
+	// console.log(nodes);
 
 	force = d3.layout.force()
 		.nodes(nodes)
@@ -315,56 +384,53 @@ function mouseover(d, i) {
 	var party = d.partyLabel;
 	var entity = d.entityLabel;
 	var offset = $("svg").offset();
-	
-
-
 	// image url that want to check
 	var imageFile = "https://raw.githubusercontent.com/ioniodi/D3js-uk-political-donations/master/photos/" + donor + ".ico";
-
-	
-	
 	// *******************************************
-	
-	
-	
 
-	
+	var infoBox = "<p> Source: <b>" + donor + "</b> " +  "<span><img src='" + imageFile + "' height='42' width='42' onError='this.src=\"https://github.com/favicon.ico\";'></span></p>"
 
-	
-	var infoBox = "<p> Source: <b>" + donor + "</b> " +  "<span><img src='" + imageFile + "' height='42' width='42' onError='this.src=\"https://github.com/favicon.ico\";'></span></p>" 	
-	
 	 							+ "<p> Recipient: <b>" + party + "</b></p>"
 								+ "<p> Type of donor: <b>" + entity + "</b></p>"
 								+ "<p> Total value: <b>&#163;" + comma(amount) + "</b></p>";
-	
-	
 	mosie.classed("active", true);
 	d3.select(".tooltip")
   	.style("left", (parseInt(d3.select(this).attr("cx") - 80) + offset.left) + "px")
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
-	
-	
-	}
+    responsiveVoice.speak("Donor's Name: " + donor + " " + "Total Value: " + amount);
+
+}
 
 function mouseout() {
 	// no more tooltips
-		var mosie = d3.select(this);
+	var mosie = d3.select(this);
 
-		mosie.classed("active", false);
+	mosie.classed("active", false);
 
-		d3.select(".tooltip")
-			.style("display", "none");
-		}
+	d3.select(".tooltip")
+		.style("display", "none");
+    responsiveVoice.cancel();
+}
 
 $(document).ready(function() {
-		d3.selectAll(".switch").on("click", function(d) {
-      var id = d3.select(this).attr("id");
-      return transition(id);
+	d3.selectAll(".switch").on("click", function(d) {
+        var id = d3.select(this).attr("id");
+        return transition(id);
     });
     return d3.csv("data/7500up.csv", display);
-
 });
 
-
+$(document).ready(function() {
+  var oldSize = parseFloat($(".content").css('font-size'));
+  var newSize = oldSize  * 1.3;
+  $(".content").hover(
+    function() {
+     $(".content").animate({ fontSize: newSize}, 200);
+    },
+    function() {
+    $(".content").animate({ fontSize: oldSize}, 200);
+   }
+ );
+});
