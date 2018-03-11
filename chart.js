@@ -399,6 +399,7 @@ function mouseover(d, i) {
     .style("top", (parseInt(d3.select(this).attr("cy") - (d.radius+150)) + offset.top) + "px")
 		.html(infoBox)
 			.style("display","block");
+
     responsiveVoice.speak("Donor's Name: " + donor + " " + "Total Value: " + amount);
 
 }
@@ -420,17 +421,4 @@ $(document).ready(function() {
         return transition(id);
     });
     return d3.csv("data/7500up.csv", display);
-});
-
-$(document).ready(function() {
-  var oldSize = parseFloat($(".content").css('font-size'));
-  var newSize = oldSize  * 1.3;
-  $(".content").hover(
-    function() {
-     $(".content").animate({ fontSize: newSize}, 200);
-    },
-    function() {
-    $(".content").animate({ fontSize: oldSize}, 200);
-   }
- );
 });
