@@ -46,7 +46,7 @@ li {
     max-width: 300px;
 }
 #public-or-private-money-split {
-    top: 550px;
+    top: 590px;
     left: -600px;
     text-align: center;
 }
@@ -64,40 +64,40 @@ li {
 #conservative, #labour, #libdem { padding: 10px; }
 #conservative {
     background: rgba(0, 0, 255, 0.3);
-    top: 110px;
+    top: 150px;
 }
 #labour {
     background: rgba(0, 255, 0, 0.3);
-    top: 330px;
+    top: 370px;
 }
 #libdem {
     background: rgba(255, 0, 0, 0.3);
-    top: 550px;
+    top: 590px;
 }
 
 /*	Donor type layout */
 #view-donor-type {
     height: 100%;
-    left: 500px;
+    left: 540px;
     width: 370px;
 
 }
 #individual {
-    top: 55px;
+    top: 95px;
 }
 #company {
-    top: 390px;
+    top: 430px;
 }
 #union {
-    top: 660px;
+    top: 700px;
 }
 #society {
-    top: 205px;
+    top: 245px;
     text-align: right;
     right: 0;
 }
 #other {
-    top: 530px;
+    top: 570px;
     text-align: right;
     right: 0
 }
@@ -136,23 +136,23 @@ li {
 
 #tier1{
     left: 30px;
-    top: 30px;
+    top: 70px;
 }
 #tier2{
     left: 250px;
-    top: 400px;
+    top: 440px;
 }
 #tier3{
     left: 420px;
-    top: 30px;
+    top: 70px;
 }
 #tier4{
     left: 630px;
-    top: 400px;
+    top: 440px;
 }
 #tier5{
     left: 790px;
-    top: 30px;
+    top: 70px;
 }
 
 #history{
