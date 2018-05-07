@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:400,700">
+<link rel="stylesheet" href="style.css">
+<style>
+  .node {
+    cursor: pointer;
+  }
+
+  .node:hover {
+    stroke: #000;
+    stroke-width: 1.5px;
+  }
+
+  .node--leaf {
+    fill: white;
+  }
+
+  .node--leaf:hover {
+    stroke: #000;
+    stroke-width: 3px;
+  }
+
+  .label {
+    font: 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+  }
+
+  .label,
+  .node--root {
+    pointer-events: none;
+  }
+
+  .tooltip {
+    margin: 0;
+    padding: 5px;
+    line-height: 1.4;
+    display: none;
+    height: 125px;
+    width: 280px;
+    text-align: left;
+    border: 4px solid rgba(0, 0, 0, .8);
+    border-radius: 2px;
+    -moz-box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 1);
+    position: absolute;
+  }
+
+  .tooltip p,
+  h3 {
+    margin: 0.2em;
+  }
+
+  /* node--leaf.active {
+    stroke: rgba(17, 17, 17, 0.8);
+    stroke-width: 5;
+} */
+</style>
+
+<body>
+  <header role="banner" id="title">
+    <li>
+      <a href="../index.html" role="button" class="pure-button switch" id="group-by-amount">Go to Original</a>
+    </li>
+    <h1>Who's funding the big three?</h1>
+    <script>
+      var bleep = new Audio();
+      bleep.src = "src/percussivebleep.wav";
+    </script>
+  </header>
+  <nav role="navigation">
+    <ul>
+      <li>
+        <a href="#" role="button" class="pure-button switch" id="all-donations" onmousedown="buttonClicked(id)">All money</a>
+      </li>
+      <li>
+        <a href="#" role="button" class="pure-button switch" id="group-by-money-source" onmousedown="buttonClicked(id)">The public's purse</a>
+      </li>
+      <li>
+        <a href="#" role="button" class="pure-button switch" id="group-by-party" onmousedown="buttonClicked(id)">Split by party</a>
+      </li>
+      <li>
+        <a href="#" role="button" class="pure-button switch" id="group-by-donor-type" onmousedown="buttonClicked(id)">Split by type of donor</a>
+      </li>
+      <li>
+        <a href="#" role="button" class="pure-button switch" id="group-by-amount" onmousedown="buttonClicked(id)">Split by amount</a>
+      </li>
+    </ul>
+  </nav>
+  <div id="chart"></div>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="src/jquery.min.js"></script>
+  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+  <script src="chart.js"></script>
+</body>

@@ -332,8 +332,7 @@ font-family:Arial,sans-serif;
   }
   
   .label,
-  .node--root,
-  .node--leaf {
+  .node--root {
     pointer-events: none;
   }
   

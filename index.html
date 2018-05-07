@@ -21,7 +21,7 @@
         _gaq.push(['_setAccount', 'UA-44807543-1']);
         _gaq.push(['_trackPageview']);
 
-        (function() {
+        (function () {
             var ga = document.createElement('script');
             ga.type = 'text/javascript';
             ga.async = true;
@@ -33,10 +33,16 @@
 
 </head>
 <!-- Add feature detection and noscript -->
-
+<!-- New_Data -->
 <body>
 
     <header role="banner" id="title">
+        <li>
+            <a href="circle-pack/index.html" role="button" class="pure-button switch">Go to Circle Pack</a>
+        </li>
+        <li>
+            <a href="New_Data/index.html" role="button" class="pure-button switch"> Number of vehicles </a>
+        </li>
         <h1>Who's funding the big three?</h1>
         <script>
             var bleep = new Audio();
@@ -45,15 +51,20 @@
     </header>
     <nav role="navigation">
         <ul onmousedown="bleep.play()">
-            <li><a href="#" role="button" class="pure-button switch" id="all-donations">All money</a>
+            <li>
+                <a href="#" role="button" class="pure-button switch" id="all-donations">All money</a>
             </li>
-            <li><a href="#" role="button" class="pure-button switch" id="group-by-money-source">The public's purse</a>
+            <li>
+                <a href="#" role="button" class="pure-button switch" id="group-by-money-source">The public's purse</a>
             </li>
-            <li><a href="#" role="button" class="pure-button switch" id="group-by-party">Split by party</a>
+            <li>
+                <a href="#" role="button" class="pure-button switch" id="group-by-party">Split by party</a>
             </li>
-            <li><a href="#" role="button" class="pure-button switch" id="group-by-donor-type">Split by type of donor</a>
+            <li>
+                <a href="#" role="button" class="pure-button switch" id="group-by-donor-type">Split by type of donor</a>
             </li>
-            <li><a href="#" role="button" class="pure-button switch" id="group-by-amount">Split by amount</a>
+            <li>
+                <a href="#" role="button" class="pure-button switch" id="group-by-amount">Split by amount</a>
             </li>
         </ul>
     </nav>
@@ -62,13 +73,17 @@
 
         <!-- Initial annotations -->
         <div id="initial-content" class="content zoom">
-            <h2>Political donations and funding accepted by the Conservatives, Labour and Liberal Democrats between the 2010 general election and August 2013, when this data was collected.</h2>
-            <p>Each circle represents the total amount donated by a single donor group, funding organisation or individual during that period.</p>
+            <h2>Political donations and funding accepted by the Conservatives, Labour and Liberal Democrats between the 2010
+                general election and August 2013, when this data was collected.</h2>
+            <p>Each circle represents the total amount donated by a single donor group, funding organisation or individual during
+                that period.</p>
             <p>Hover over a circle to show further information.</p>
 
-            <p>Get an immediate overview of how party funding is shaped in Britain today by selecting one of the options at the top of the page.</p>
+            <p>Get an immediate overview of how party funding is shaped in Britain today by selecting one of the options at
+                the top of the page.</p>
             <p>Data is based on all reportable donations over &#163;7500.</p>
-            <p>Data source: <a href="http://www.electoralcommission.org.uk/">The Electoral Commission.</a>
+            <p>Data source:
+                <a href="http://www.electoralcommission.org.uk/">The Electoral Commission.</a>
             </p>
         </div>
         <div id="value-scale">
@@ -96,30 +111,32 @@
         <!-- Public or private money annotations -->
         <div id="view-source-type">
             <div id="public-or-private-money" class="public-private">
-                <div  class="content zoom">
-                        <h3>Public money vs private cash</h3>
-                        <p>Despite general public opposition to more taxpayer money being given to political parties, public funds are already provided to opposition parties in the form of 'short money' from the House of Commons, House of Lords and Scottish Parliament.</p>
-                        <p>The parties also benefit from 'Policy development grants' given by the Electoral Commission.</p>
+                <div class="content zoom">
+                    <h3>Public money vs private cash</h3>
+                    <p>Despite general public opposition to more taxpayer money being given to political parties, public funds
+                        are already provided to opposition parties in the form of 'short money' from the House of Commons,
+                        House of Lords and Scottish Parliament.</p>
+                    <p>The parties also benefit from 'Policy development grants' given by the Electoral Commission.</p>
                 </div>
             </div>
             <div id="public-or-private-money-split" class="public-private">
                 <div id="private-money" class="content zoom">
                     <h5>Private Donations</h5>
                     <strong>Total: &#163;89,752,524
-                        </strong>
-                            <p>Proportion of all donations:
-                                <strong>77%</strong>
-                            </p>
+                    </strong>
+                    <p>Proportion of all donations:
+                        <strong>77%</strong>
+                    </p>
                 </div>
                 <div id="public-money" class="content zoom">
                     <h5>Public Funds</h5>
                     <strong>Total: &#163;26,579,038
-                        </strong>
-                            <p>Proportion of all donations:
-                                <strong>23%</strong>
-                            </p>
+                    </strong>
+                    <p>Proportion of all donations:
+                        <strong>23%</strong>
+                    </p>
                 </div>
-          </div>
+            </div>
         </div>
         <!-- End public or private money -->
 
@@ -128,83 +145,83 @@
             <div id="conservative" class="content zoom">
                 <h5>Conservative Party</h5>
                 <strong>Total: &#163;43.7 million
-                    </strong>
-                        <p>Top 50 donors gave:
-                            <strong>&#163;23,329,828</strong>
-                            <br>
-                            <strong>50%</strong>of the total.</p>
-                        <p>Top 10 donors gave:
-                            <strong>&#163;12,877,989</strong>
-                            <br>
-                            <strong>27%</strong>of the total</p>
+                </strong>
+                <p>Top 50 donors gave:
+                    <strong>&#163;23,329,828</strong>
+                    <br>
+                    <strong>50%</strong>of the total.</p>
+                <p>Top 10 donors gave:
+                    <strong>&#163;12,877,989</strong>
+                    <br>
+                    <strong>27%</strong>of the total</p>
             </div>
             <div id="labour" class="content zoom">
                 <h5>Labour Party</h5>
                 <strong>Total: &#163;38.9 million
-                    </strong>
-                        <p>Top 50 donors gave:
-                            <strong>&#163;39,196,684</strong>
-                            <br>
-                            <strong>92%</strong>of the total.</p>
-                        <p>Top 10 donors gave:
-                            <strong>&#163;34,715,877</strong>
-                            <br>
-                            <strong>81%</strong>of the total</p>
+                </strong>
+                <p>Top 50 donors gave:
+                    <strong>&#163;39,196,684</strong>
+                    <br>
+                    <strong>92%</strong>of the total.</p>
+                <p>Top 10 donors gave:
+                    <strong>&#163;34,715,877</strong>
+                    <br>
+                    <strong>81%</strong>of the total</p>
             </div>
             <div id="libdem" class="content zoom">
                 <h5>Liberal Democrats</h5>
                 <strong>Total: &#163;7.1 million
-                    </strong>
-                        <p>Top 50 donors gave:
-                            <strong>&#163;6,975,973</strong>
-                            <br>
-                            <strong>63%</strong>of the total.</p>
-                        <p>Top 10 donors gave:
-                            <strong>&#163;4,823,899.71</strong>
-                            <br>
-                            <strong>43%</strong>of the total</p>
+                </strong>
+                <p>Top 50 donors gave:
+                    <strong>&#163;6,975,973</strong>
+                    <br>
+                    <strong>63%</strong>of the total.</p>
+                <p>Top 10 donors gave:
+                    <strong>&#163;4,823,899.71</strong>
+                    <br>
+                    <strong>43%</strong>of the total</p>
             </div>
         </div>
         <div id="view-donor-type" class="content">
             <div id="individual" class="zoom">
                 <h5>Individuals</h5>
                 <strong>Total: &#163; 35,191,222
-                    </strong>
-                        <p>Proportion of all donations:
-                            <strong>39%</strong>
-                        </p>
+                </strong>
+                <p>Proportion of all donations:
+                    <strong>39%</strong>
+                </p>
             </div>
             <div id="company" class="zoom">
                 <h5>Companies</h5>
                 <strong>Total: &#163; 17,052,129
-                    </strong>
-                        <p>Proportion of all donations:
-                            <strong>19%</strong>
-                        </p>
+                </strong>
+                <p>Proportion of all donations:
+                    <strong>19%</strong>
+                </p>
             </div>
             <div id="union" class="zoom">
                 <h5>Trade Unions</h5>
                 <strong>Total: &#163;31,474,649
-                    </strong>
-                        <p>Proportion of all donations:
-                            <strong>35%</strong>
-                        </p>
+                </strong>
+                <p>Proportion of all donations:
+                    <strong>35%</strong>
+                </p>
             </div>
             <div id="society" class="zoom">
                 <h5>Societies</h5>
                 <strong>Total: &#163;4,550,129
-                    </strong>
-                        <p>Proportion of all donations:
-                            <strong>5%</strong>
-                        </p>
+                </strong>
+                <p>Proportion of all donations:
+                    <strong>5%</strong>
+                </p>
             </div>
             <div id="other" class="zoom">
                 <h5>Others</h5>
                 <strong>Total: &#163; 1,484,395
-                    </strong>
-                        <p>Proportion of all donations:
-                            <strong>2%</strong>
-                        </p>
+                </strong>
+                <p>Proportion of all donations:
+                    <strong>2%</strong>
+                </p>
             </div>
         </div>
 
@@ -228,7 +245,16 @@
 
     </div>
     <div id="chart"></div>
-
+    <div id="history">
+        <table id="table">
+            <tr>
+                <th>
+                    History
+                </th>
+            </tr>
+            <td id="list"></td>
+        </table>
+    </div>
 
 
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
@@ -240,5 +266,7 @@
     <script src="src/d3.v3.min.js" charset="utf-8"></script>
     <script src="chart.js"></script>
 </body>
+
+
 
 </html>
