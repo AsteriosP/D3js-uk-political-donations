@@ -109,12 +109,12 @@ li {
     font-size: 0.75em;
 }
 #a, #b, #c, #d, #e { left: 40px; }
-#a { top: 635px;}
-#b { top: 585px;}
-#c { top: 535px;}
-#d { top: 485px;}
-#e { top: 435px;}
-#f { top: 648px; left: 575px; }
+#a { top: 675px;}
+#b { top: 625px;}
+#c { top: 575px;}
+#d { top: 525px;}
+#e { top: 475px;}
+#f { top: 688px; left: 575px; }
 
 /* var amountCenters = {
         tier1: {x: 250, y: h / 3},
